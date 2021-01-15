@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace ChatBot
 {
-    class CustomCommands
+    public static class CustomCommands
     {
         public static readonly RoutedUICommand Salir = new RoutedUICommand(
             "Salir",

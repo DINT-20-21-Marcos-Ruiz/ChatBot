@@ -26,17 +26,15 @@ namespace ChatBot
         ObservableCollection<Mensaje> mensajes;
         public MainWindow()
         {
-            InitializeComponent();
             mensajes = new ObservableCollection<Mensaje>();
-            mensajes.Add(new Mensaje("Lo siento, estoy un poco cansado para hablar.", Emisor.Robot));
-            mensajes.Add(new Mensaje("Lo siento, estoy un poco cansado para hablar.", Emisor.Usuario));
+            InitializeComponent();
             mensajesListBox.DataContext = mensajes;
         }
 
         //SALIR
         private void CommandBindingSalir_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Application.Current.Windows[0].Close();
+            System.Windows.Application.Current.Shutdown();
         }
 
         //CONEXIÓN
@@ -48,42 +46,46 @@ namespace ChatBot
         //GUARDAR
         private void CommandBindingGuardar_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "*.txt|*.txt";
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            if (saveFileDialog.ShowDialog() == true)
-                 File.WriteAllText(saveFileDialog.FileName, mensajesListBox.ToString());
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "*.txt|*.txt";
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                if (saveFileDialog.ShowDialog() == true)
+                    File.WriteAllText(saveFileDialog.FileName, mensajesListBox.ToString());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
         private void CommandBindingGuardar_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if(mensajesListBox != null)
+            if(mensajes.Count > 0)
             {
-                e.CanExecute = false;
+                e.CanExecute = true;
             }
             else
             {
-                e.CanExecute = true;
+                e.CanExecute = false;
             }
         }
 
         //NUEVA CONVERSACIÓN
         private void CommandBindingNueva_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            for (int i = 0; i < mensajes.Count; i++)
-            {
-                mensajes.RemoveAt(i);
-            }
+            mensajes.Clear();
         }
         private void CommandBindingNueva_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (mensajesListBox != null)
+            if (mensajes.Count > 0)
             {
-                e.CanExecute = false;
+                e.CanExecute = true;
             }
             else
             {
-                e.CanExecute = true;
+                e.CanExecute = false;
             }
         }
 
@@ -96,15 +98,14 @@ namespace ChatBot
         }
         private void CommandBindingEnviar_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            /*if(mensaje_TextBox.Text == "")
+            if(mensaje_TextBox!=null && mensaje_TextBox.Text != "")
             {
-                e.CanExecute = false;
+                e.CanExecute = true;
             }
             else
             {
-                e.CanExecute = true;
-            }*/
-            e.CanExecute = false;
+                e.CanExecute = false;
+            }
         }
 
         //CONFIGURACIÓN

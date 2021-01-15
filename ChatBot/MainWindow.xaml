@@ -57,22 +57,24 @@
         <!--EMISOR BACKGROUND TRIGGER-->
         <Style TargetType="Border" x:Key="emisorBorder_Trigger">
             <Setter Property="Background" Value="LightCyan"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Emisor}" Value="Usuario">
                     <Setter Property="Background" Value="LightGreen"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <!--MENSAJES ITEM BASE-->
         <DataTemplate DataType="{x:Type local:Mensaje}">
-            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="5" Margin="10" Style="{StaticResource emisorBorder_Trigger}">
+            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="5" Margin="10" MaxWidth="250" Style="{StaticResource emisorBorder_Trigger}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Image Style="{StaticResource emisorImg_Trigger}"/>
                         <TextBlock Style="{StaticResource emisorTxtBlock_Trigger}"/>
                     </StackPanel>
-                    <TextBlock Text="{Binding Texto}"/>
+                    <TextBlock Text="{Binding Texto}" TextWrapping="Wrap"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -81,7 +83,8 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Archivo">
-                    <MenuItem Header="_Nueva conversación" InputGestureText="Ctrl+N" Command="local:CustomCommands.NuevaConv">
+                    <MenuItem Header="_Nueva conversación" InputGestureText=
+                              "Ctrl+N" Command="local:CustomCommands.NuevaConv">
                         <MenuItem.Icon>
                             <Image Source="Resources/new.png"/>
                         </MenuItem.Icon>
@@ -152,7 +155,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                
+              
             </ItemsControl>
         </DockPanel>
     </Grid>
