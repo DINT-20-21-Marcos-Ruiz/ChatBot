@@ -24,6 +24,7 @@ namespace ChatBot
     public partial class MainWindow : Window
     {
         ObservableCollection<Mensaje> mensajes;
+        string mensajesCadena = "";
         public MainWindow()
         {
             mensajes = new ObservableCollection<Mensaje>();
@@ -48,11 +49,15 @@ namespace ChatBot
         {
             try
             {
+                foreach (Mensaje mensaje in mensajes)
+                {
+                    mensajesCadena += mensaje.Texto.ToString() + "\n";
+                }
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "*.txt|*.txt";
                 saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 if (saveFileDialog.ShowDialog() == true)
-                    File.WriteAllText(saveFileDialog.FileName, mensajesListBox.ToString());
+                    File.WriteAllText(saveFileDialog.FileName, mensajesCadena);
             }
             catch (Exception)
             {
@@ -94,6 +99,7 @@ namespace ChatBot
         {
             mensajes.Add(new Mensaje(mensaje_TextBox.Text,Emisor.Usuario));
             mensajes.Add(new Mensaje("Lo siento, estoy un poco cansado para hablar.", Emisor.Robot));
+            mensaje_TextBox.Text = "";
 
         }
         private void CommandBindingEnviar_CanExecute(object sender, CanExecuteRoutedEventArgs e)
