@@ -26,8 +26,7 @@
                         CanExecute="CommandBindingNueva_CanExecute">
         </CommandBinding>
         <CommandBinding Command="local:CustomCommands.Config"
-                        Executed="CommandBindingConfig_Executed"
-                        CanExecute="CommandBindingConfig_CanExecute">
+                        Executed="CommandBindingConfig_Executed">
         </CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>

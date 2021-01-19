@@ -117,10 +117,14 @@ namespace ChatBot
         //CONFIGURACIÓN
         private void CommandBindingConfig_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-        }
-        private void CommandBindingConfig_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        { 
-            e.CanExecute = false;
+            Configuracion nueva_ventana = new Configuracion();
+            nueva_ventana.Owner = this;
+            nueva_ventana.ShowInTaskbar = false;
+            nueva_ventana.ResizeMode = ResizeMode.NoResize;
+            if (nueva_ventana.ShowDialog() == true)
+            {
+                
+            }
         }
 
     }

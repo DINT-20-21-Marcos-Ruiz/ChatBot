@@ -53,7 +53,11 @@ namespace ChatBot
         public static readonly RoutedUICommand Config = new RoutedUICommand(
             "Config",
             "Config",
-            typeof(CustomCommands)
+            typeof(CustomCommands),
+            new InputGestureCollection
+            {
+                new KeyGesture(Key.C,ModifierKeys.Control)
+            }
             );
     }
 }
