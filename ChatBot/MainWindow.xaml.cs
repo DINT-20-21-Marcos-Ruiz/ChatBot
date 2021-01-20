@@ -121,9 +121,18 @@ namespace ChatBot
             nueva_ventana.Owner = this;
             nueva_ventana.ShowInTaskbar = false;
             nueva_ventana.ResizeMode = ResizeMode.NoResize;
+            nueva_ventana.FondoColor = Properties.Settings.Default.fondoColor;
+            nueva_ventana.UserColor = Properties.Settings.Default.userColor;
+            nueva_ventana.RobotColor = Properties.Settings.Default.robotColor;
+            nueva_ventana.Sexo = Properties.Settings.Default.sexo;
+
             if (nueva_ventana.ShowDialog() == true)
             {
-                
+                Properties.Settings.Default.fondoColor = nueva_ventana.FondoColor;
+                Properties.Settings.Default.userColor = nueva_ventana.UserColor;
+                Properties.Settings.Default.robotColor = nueva_ventana.RobotColor;
+                Properties.Settings.Default.sexo = nueva_ventana.Sexo;
+
             }
         }
 

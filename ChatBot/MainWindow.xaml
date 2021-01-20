@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatBot"
+        xmlns:properties="clr-namespace:ChatBot.Properties"
         mc:Ignorable="d"
         Title="ChatBox" Height="590" Width="380" Icon="robot.ico">
     <Window.CommandBindings>
+        
         <CommandBinding Command="local:CustomCommands.Salir"
                         Executed="CommandBindingSalir_Executed">
         </CommandBinding>
@@ -30,16 +32,11 @@
         </CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
+        <local:SexoConversor x:Key="sexoConversor"></local:SexoConversor>
         <!--EMISOR IMAGE TRIGGER-->
         <Style TargetType="Image" x:Key="emisorImg_Trigger">
-            <Setter Property="Source" Value="Resources/robot.png"/>
             <Setter Property="Width" Value="20"/>
             <Setter Property="Margin" Value="0,0,5,0"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Emisor}" Value="Usuario">
-                    <Setter Property="Source" Value="Resources/hombre.png"/>
-                </DataTrigger>
-            </Style.Triggers>
         </Style>
 
         <!--EMISOR TIPO TRIGGER-->
@@ -55,11 +52,11 @@
 
         <!--EMISOR BACKGROUND TRIGGER-->
         <Style TargetType="Border" x:Key="emisorBorder_Trigger">
-            <Setter Property="Background" Value="LightCyan"/>
+            <Setter Property="Background" Value="{Binding Source={x:Static properties:Settings.Default},Path=robotColor}"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Emisor}" Value="Usuario">
-                    <Setter Property="Background" Value="LightGreen"/>
+                    <Setter Property="Background" Value="{Binding Source={x:Static properties:Settings.Default},Path=userColor}"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -70,7 +67,7 @@
             <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="5" Margin="10" MaxWidth="250" Style="{StaticResource emisorBorder_Trigger}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Image Style="{StaticResource emisorImg_Trigger}"/>
+                        <Image Style="{StaticResource emisorImg_Trigger}"   Source="{Binding Path=Emisor, Converter={StaticResource sexoConversor}}"/>
                         <TextBlock Style="{StaticResource emisorTxtBlock_Trigger}"/>
                     </StackPanel>
                     <TextBlock Text="{Binding Texto}" TextWrapping="Wrap"/>
@@ -144,7 +141,7 @@
                 </Button>
   
             </DockPanel>
-            <ItemsControl x:Name="mensajesListBox" Background="LightGoldenrodYellow"
+            <ItemsControl x:Name="mensajesListBox" Background="{Binding Source={x:Static properties:Settings.Default},Path=fondoColor}"
                           ScrollViewer.VerticalScrollBarVisibility="Visible" 
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ItemsSource="{Binding}">

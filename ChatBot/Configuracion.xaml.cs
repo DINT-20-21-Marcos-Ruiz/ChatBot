@@ -18,12 +18,21 @@ namespace ChatBot
     /// Lógica de interacción para Configuracion.xaml
     /// </summary>
     public partial class Configuracion : Window
+       
     {
+        List<String> sexo;
+        public string FondoColor { get; set; }
+        public string UserColor { get; set; }
+        public string RobotColor { get; set; }
+        public string Sexo { get; set; }
+
         public Configuracion()
         {
             
             InitializeComponent();
             this.DataContext = this;
+            sexo = new List<string>() {"Hombre","Mujer" };
+            sexo_ComboBox.ItemsSource = sexo;
             fondoColors_ComboBox.ItemsSource = typeof(Colors).GetProperties();
             userColors_ComboBox.ItemsSource = typeof(Colors).GetProperties();
             robotColors_ComboBox.ItemsSource = typeof(Colors).GetProperties();
@@ -31,7 +40,7 @@ namespace ChatBot
 
         private void Aceptar_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = true;
         }
     }
 }

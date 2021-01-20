@@ -113,6 +113,16 @@ namespace ChatBot.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mujer {
+            get {
+                object obj = ResourceManager.GetObject("mujer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap robot {
             get {
                 object obj = ResourceManager.GetObject("robot", resourceCulture);
